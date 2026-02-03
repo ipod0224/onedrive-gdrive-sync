@@ -8,14 +8,20 @@ CONFIG_FILE="${CONFIG_DIR}/rclone.conf"
 mkdir -p "${CONFIG_DIR}"
 
 # Inject rclone config from environment variable
-if [ -n "${RCLONE_CONF_CONTENT}" ]; then
+# Supports both Base64 encoded (RCLONE_CONF_BASE64) and plain text (RCLONE_CONF_CONTENT)
+if [ -n "${RCLONE_CONF_BASE64}" ]; then
+    echo "Decoding Base64 rclone config..."
+    echo "${RCLONE_CONF_BASE64}" | base64 -d > "${CONFIG_FILE}"
+    chmod 600 "${CONFIG_FILE}"
+    echo "Config file created at ${CONFIG_FILE}"
+elif [ -n "${RCLONE_CONF_CONTENT}" ]; then
     echo "Injecting rclone config from environment..."
-    echo "${RCLONE_CONF_CONTENT}" > "${CONFIG_FILE}"
+    printf '%s' "${RCLONE_CONF_CONTENT}" > "${CONFIG_FILE}"
     chmod 600 "${CONFIG_FILE}"
     echo "Config file created at ${CONFIG_FILE}"
 else
-    echo "ERROR: RCLONE_CONF_CONTENT environment variable is not set!"
-    echo "Please set it in Zeabur dashboard with your rclone config content."
+    echo "ERROR: RCLONE_CONF_BASE64 or RCLONE_CONF_CONTENT environment variable is not set!"
+    echo "Please set it in Zeabur dashboard."
     exit 1
 fi
 
