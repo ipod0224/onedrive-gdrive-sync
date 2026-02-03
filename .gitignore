@@ -1,0 +1,11 @@
+# Rclone config (NEVER commit this!)
+rclone.conf
+*.conf
+
+# Environment files
+.env
+.env.*
+
+# Logs
+*.log
+logs/

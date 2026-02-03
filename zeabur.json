@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schema.zeabur.app/template.json",
+  "name": "onedrive-gdrive-sync",
+  "description": "Auto sync OneDrive to Google Drive using Rclone",
+  "tags": ["sync", "backup", "rclone", "onedrive", "gdrive"],
+  "icon": "https://rclone.org/img/rclone-120x120.png",
+  "variables": [
+    {
+      "key": "RCLONE_CONF_CONTENT",
+      "type": "STRING",
+      "name": "Rclone Config Content",
+      "description": "Paste your rclone config content here (from 'rclone config show')"
+    },
+    {
+      "key": "SYNC_INTERVAL",
+      "type": "STRING",
+      "name": "Sync Interval (seconds)",
+      "description": "How often to sync (default: 60)",
+      "default": "60"
+    },
+    {
+      "key": "RCLONE_SOURCE",
+      "type": "STRING",
+      "name": "Source Path",
+      "description": "Source remote path (default: onedrive:)",
+      "default": "onedrive:"
+    },
+    {
+      "key": "RCLONE_DEST",
+      "type": "STRING",
+      "name": "Destination Path",
+      "description": "Destination remote path (default: gdrive:OneDrive-Backup)",
+      "default": "gdrive:OneDrive-Backup"
+    },
+    {
+      "key": "RCLONE_TRANSFERS",
+      "type": "STRING",
+      "name": "Parallel Transfers",
+      "description": "Number of parallel transfers (default: 4)",
+      "default": "4"
+    }
+  ]
+}
