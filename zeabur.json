@@ -6,6 +6,12 @@
   "icon": "https://rclone.org/img/rclone-120x120.png",
   "variables": [
     {
+      "key": "RCLONE_CONF_BASE64",
+      "type": "STRING",
+      "name": "Rclone Config (Base64)",
+      "description": "Base64 encoded rclone config (recommended)"
+    },
+    {
       "key": "RCLONE_CONF_CONTENT",
       "type": "STRING",
       "name": "Rclone Config Content",
@@ -16,7 +22,7 @@
       "type": "STRING",
       "name": "Sync Interval (seconds)",
       "description": "How often to sync (default: 60)",
-      "default": "60"
+      "default": "1800"
     },
     {
       "key": "RCLONE_SOURCE",
@@ -38,6 +44,18 @@
       "name": "Parallel Transfers",
       "description": "Number of parallel transfers (default: 4)",
       "default": "4"
+    },
+    {
+      "key": "ALERT_EMAIL",
+      "type": "STRING",
+      "name": "Alert Email",
+      "description": "Email address for token expiration alerts"
+    },
+    {
+      "key": "SENDGRID_API_KEY",
+      "type": "STRING",
+      "name": "SendGrid API Key",
+      "description": "SendGrid API key for sending alert emails (get free at sendgrid.com)"
     }
   ]
 }

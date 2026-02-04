@@ -86,8 +86,43 @@ rclone config show | base64
 | `RCLONE_DEST` | 否 | 目標路徑 | `gdrive:材料明細` |
 | `SYNC_INTERVAL` | 否 | 同步間隔（秒） | `1800`（30分鐘） |
 | `RCLONE_TRANSFERS` | 否 | 並行傳輸數 | `4` |
+| `ALERT_EMAIL` | 否 | 警報通知信箱 | `your@email.com` |
+| `SENDGRID_API_KEY` | 否 | SendGrid API Key | `SG.xxxxx` |
 
 > *`RCLONE_CONF_BASE64` 或 `RCLONE_CONF_CONTENT` 擇一設定即可，建議使用 Base64 編碼避免特殊字元問題。
+
+## 郵件警報設定（選用）
+
+當 Token 過期或同步連續失敗時，服務會自動發送郵件通知。
+
+### 步驟 1：註冊 SendGrid（免費）
+
+1. 前往 [SendGrid](https://sendgrid.com) 註冊帳號
+2. 免費方案每天可發送 100 封郵件
+
+### 步驟 2：建立 API Key
+
+1. 登入 SendGrid Dashboard
+2. 前往 Settings → API Keys
+3. 點擊 "Create API Key"
+4. 選擇 "Restricted Access"，僅啟用 "Mail Send"
+5. 複製產生的 API Key（只會顯示一次）
+
+### 步驟 3：設定環境變數
+
+在 Zeabur 設定以下環境變數：
+
+```bash
+ALERT_EMAIL=ipod0224@gmail.com
+SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+### 警報觸發條件
+
+| 事件 | 說明 |
+|------|------|
+| Token 過期 | OneDrive 或 Google Drive 授權失效 |
+| 連續失敗 3 次 | 同步連續失敗 3 次以上 |
 
 ## 設定範例
 
